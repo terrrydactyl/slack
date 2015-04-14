@@ -5,8 +5,8 @@
 </head>
 <body>
 <ul>
-    {% for tag in tags %}
-    <li>{{ tag }}</li>
+    {% for tag, count in tags.iteritems() %}
+    <li>{{ tag }}, {{count}}</li>
     {% endfor %}
 </ul>
 </body>

@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request
 from flask import render_template
 from HTMLParser import HTMLParser
+from collections import Counter
 import urllib2
 
 
@@ -30,7 +31,9 @@ def my_form_post():
     page_source = response.read()
     parser = MyHTMLParser()
     parser.feed(page_source)
-    return render_template('tags.html', tags=parser.container)
+    c = Counter(parser.container)
+    print c
+    return render_template('tags.html', tags=c)
 
 
 if __name__ == '__main__':
