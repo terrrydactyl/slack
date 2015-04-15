@@ -4,6 +4,7 @@ from flask import render_template
 from HTMLParser import HTMLParser
 from collections import Counter
 import urllib2
+from bs4 import BeautifulSoup
 
 
 class MyHTMLParser(HTMLParser):
@@ -29,11 +30,12 @@ def my_form_post():
     text = request.form['text']
     response = urllib2.urlopen(text)
     page_source = response.read()
+    soup = BeautifulSoup(page_source)
+    pretty_html = soup.prettify()
     parser = MyHTMLParser()
     parser.feed(page_source)
     c = Counter(parser.container)
-    print c
-    return render_template('tags.html', tags=c)
+    return render_template('tags.html', tags=c, content=pretty_html)
 
 
 if __name__ == '__main__':
