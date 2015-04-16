@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Dashboard Template for Bootstrap</title>
+    <title>Slack Challenge</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
@@ -17,6 +17,7 @@
     <!-- Custom styles for this template -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/simple-sidebar.css') }}">
 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -31,8 +32,8 @@
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
-            {% for tag, count in tags.iteritems() %}
-            <li><a id="query">{{ tag }}, {{ count }}</a></li>
+            {% for tag, count in tags %}
+            <li><a onclick="highlight('.slack-{{ tag|replace('<', '')|replace('>', '')|replace('/', 'end-') }}')">{{ tag }}, {{ count }}</a></li>
             {% endfor %}
         </ul>
     </div>
@@ -60,4 +61,9 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
+<script>
+    function highlight(tag){
+        $( tag ).toggleClass("highlight");
+    }
+</script>
 </html>
