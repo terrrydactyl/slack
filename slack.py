@@ -10,19 +10,19 @@ import json
 
 
 class MyHTMLParser(HTMLParser):
-    container = []
-    div_wrap = Markup("")
+    def __init__(self):
+        HTMLParser.__init__(self)
+        self.container = []
+        self.div_wrap = Markup("")
 
     def handle_starttag(self, tag, attrs):
         self.container.append("<%s>" % tag)
         attrs_string = ''
-        print attrs
         for attr in attrs:
             str = '%s="%s" ' % (attr[0], attr[1])
             attrs_string = attrs_string + str
         if attrs_string and attrs_string[-1] == " ":
             attrs_string = attrs_string[:-1]
-        print attrs_string
         self.div_wrap = self.div_wrap + Markup('<span class="slack-%s">' % tag) + \
                         Markup.escape('<%s %s>' % (tag, attrs_string)) + Markup('</span>')
 
@@ -49,6 +49,7 @@ def my_form_post():
     page_source = r.text
     parser = MyHTMLParser()
     parser.feed(page_source)
+    print parser.container.count('</a>')
     tag_counter = Counter(parser.container)
     return render_template('tags.html', tags=sorted(tag_counter.items(), key=itemgetter(0)),
                        content=parser.div_wrap)

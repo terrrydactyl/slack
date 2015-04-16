@@ -1,10 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <title>Slack Challenge</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
 <body>
-<h1>Enter a url</h1>
-<form action="." method="POST">
-    <input type="text" name="text">
-    <input type="submit" name="my-form" value="Send">
-</form>
+<div class="jumbotron vertical-center">
+    <div class="container">
+        <h1>Slack Challenge</h1>
+        <p>
+            Please enter a URL. This program will take the source code from
+            the URL and display its HTML tags and its count. You may click the
+            tag to toggle highlight on the source page.
+        </p>
+        <form action="." method="POST">
+            <div class="input-group">
+                <input type="text" name="text" class="form-control" placeholder="Enter a url...">
+                <span class="input-group-btn">
+                    <input type="submit" name="my-form" class="btn btn-default" value="Send">
+                </span>
+            </div><!-- /input-group -->
+        </form>
+    </div>
+</div>
+
 </body>
 </html>
